@@ -1,0 +1,61 @@
+1.Number of pairs(x,y)
+public class Solution {
+    int getIndex(int y[], int n, int ele){
+      int low=0;
+      int high =n-1;
+      //merko 2 se bde eleme pta krne he merko phla elem chaiye jo 2 se bda he
+      //to high ko mid-1 krdonga taki jo last mein aae index wo hm return krwade
+      int ans=-1;
+      while(low<=high){
+        int mid=(low+high)/2;
+        if(y[mid]>ele){   //if y[mid] pe jo ele rkha h wo agr bda he 
+          ans=mid;
+          high=mid-1;   //nhi to i ko mid-1 krdo
+          }
+        else{
+          low=mid+1;
+          }  
+        }
+        return ans;
+      }
+    long countPairs(int[] x, int[] y, int m, int n){
+      int zeros = 0, one = 0, three = 0, four = 0;
+      for(int i=0; i<n; i++){
+        if(y[i]==0) zeros++;
+        if(y[i]==1 one++;
+        if(y[i]==3) three++;
+        if(y[i]==4) four++;
+        }
+        Arrays.sort(x);
+        Arrays.sort(y);
+        
+        //traversing x elements
+        long ans=0;
+        for(int i=0; i<m; i++){
+          if(x[i]==0) continue;
+          else if(x[i]==1){
+            ans=ans+zeroes;   //jitne bhi zeros he
+            }
+          else if(x[i]==2){
+            int index=getindex(y, n, 2);  //hme dusre array mein wo index bta do jo 2 se bda he Binary search
+            if(index!=-1){
+            ans=n-index;  //jese agr index 1 return hoa to 5-1=4 to 4 ele aise he jo 2 se bde he
+            }
+            ans=ans-three;
+            ans=ans-four;
+            ans+=one+zeros;
+          }
+          else{
+            int index = getIndex(y, n, x[i]); //bs bda ele la do
+            if(index!=-1){
+              ans+=n-index;  //jitne bde he add krto
+              }
+              //0 and 1 hmesha add honge
+              ans+=one+zeros;
+              if(x[i]==3){
+                ans+=two;  //jitne bhi two h wo bhi add krne honge
+                }
+            }
+      }
+      return ans;
+}
