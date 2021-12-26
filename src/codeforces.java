@@ -458,19 +458,16 @@ public class codeforces {
     static void kthNotDivisible() {
         InputReader sc = new InputReader(System.in);
         int t =sc.readInt();
+//        final long startTime = System.nanoTime();
         while(t-->0){
             long n =sc.readLong();
             long k =sc.readLong();
-            long count=0;
-            long i=1;
-            while(count<k){
-                if(i%n!=0){
-                    count++;
-                }
-                i++;
-            }
-            System.out.println(i-1);
+            long kth = k+(k/(n-1));
+            if(kth%n==0) System.out.println(kth-1);
+            else System.out.println(kth);
         }
+//        final long duration = System.nanoTime() - startTime;
+//        System.out.println("Seconds Elapsed = "+duration/1000000000);
     }
     static void divideAndMultiply() throws IOException {
         InputReader sc =new InputReader(System.in);
@@ -575,6 +572,6 @@ public class codeforces {
         }
     }
     public static void main(String[] args) throws IOException{
-        lengthAndSum();
+        kthNotDivisible();
     }
 }

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3ff0ec9d-1644-4a1e-a392-9e065ce26004" name="Default Changelist" comment="added new files">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="3ff0ec9d-1644-4a1e-a392-9e065ce26004" name="Default Changelist" comment="added 3 methods">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/codeforces.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/codeforces.java" afterDir="false" />
     </list>
@@ -78,7 +77,7 @@
       <workItem from="1640442981631" duration="7494000" />
       <workItem from="1640494477433" duration="3745000" />
       <workItem from="1640510938965" duration="640000" />
-      <workItem from="1640529060034" duration="3102000" />
+      <workItem from="1640529060034" duration="6008000" />
     </task>
     <task id="LOCAL-00001" summary="added new files">
       <created>1640082503885</created>
@@ -87,7 +86,14 @@
       <option name="project" value="LOCAL" />
       <updated>1640082503885</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="added 3 methods">
+      <created>1640532703808</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1640532703808</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -107,28 +113,16 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added new files" />
-    <option name="LAST_COMMIT_MESSAGE" value="added new files" />
+    <MESSAGE value="added 3 methods" />
+    <option name="LAST_COMMIT_MESSAGE" value="added 3 methods" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/codeforces.java</url>
-          <line>555</line>
+          <line>551</line>
           <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/codeforces.java</url>
-          <line>451</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/codeforces.java</url>
-          <line>410</line>
-          <properties class="codeforces" method="lengthAndSum">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
