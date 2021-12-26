@@ -3,12 +3,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.StringTokenizer;
+import java.util.*;
 
-class codeforces {
+public class codeforces {
     //Fast I/O
     static class InputReader {
         private InputStream stream;
@@ -116,6 +113,41 @@ class codeforces {
             sum+=arr[i];
         }
         return sum;
+    }
+    static long countWays(long[] arr, int n, int i, long freeMinutes, int count,int recurDirect){
+        if(freeMinutes==0 || i>=n) {
+//            System.out.println("Here count is "+ count);
+            return count;
+        }
+//        if(recurDirect==0){
+//            System.out.println("Head->"+arr[i]);
+//        }
+//        if(recurDirect==1){
+//            System.out.println("left->"+arr[i]+"-> free min->"+(freeMinutes-arr[i]));
+//        }
+//        if(recurDirect==2){
+//            System.out.println("right->"+arr[i]+"-> free min->"+(freeMinutes-arr[i]));
+//        }
+//        if(recurDirect==0){
+//            System.out.println(arr[i]);
+//        }
+        if(freeMinutes-arr[i]>=0) {
+//            System.out.print(arr[i]+" ");
+            return Math.max(countWays(arr, n, i + 1, freeMinutes - arr[i], count+1,1),
+                    countWays(arr, n, i + 1, freeMinutes, count,2));
+        }else{
+            //we forcefully put to end
+            return countWays(arr,n,i+1,0,count,0);
+        }
+    }
+    static long[] returnPrefixArray(long[] arr, int size){
+        long[] prefix = new long[size];
+        long sum =0;
+        for (int i = 0; i < size; i++) {
+            sum+=arr[i];
+            prefix[i] = sum;
+        }
+        return prefix;
     }
 
     //Solvers
@@ -380,21 +412,48 @@ class codeforces {
         InputReader sc = new InputReader(System.in);
         int m=sc.readInt();
         int s=sc.readInt();
-        int lowerBound = findRange(m);
-        int upperBound = lowerBound*10;
-        int min = Integer.MAX_VALUE;
-        int max = -1;
-        for(int i=lowerBound; i<upperBound; i++){
-            if(sumOfDigits(i)==s){
-                min=Math.min(min,i);
-                max=Math.max(max,i);
+        if(s==0){
+            if(m==1){
+                System.out.println("0  0");
+                return;
+            }
+            else{
+                System.out.println("-1  -1");
+                return;
             }
         }
-        if(min==Integer.MAX_VALUE){
-            System.out.println(-1+" "+-1);
+        StringBuilder maxi = new StringBuilder();
+        StringBuilder mini = new StringBuilder();
+        for(int i=0; i<m; i++){
+            //we every time provide k
+            int k = Math.min(9,s);
+            //we push the max number in the string
+            maxi.append(k);
+            //and we decrease s
+            s-=k;
+        }
+        //if s is still greater then 0
+        if(s>0){
+            // like 9 9 but we have 27
+            System.out.println("-1 -1");
             return;
         }
-        System.out.println(min+" "+max);
+        //for finding minimum
+        for(int i=m-1; i>=0; i--){
+            mini.append(maxi.charAt(i));
+        }
+        int j=0;
+        //then we find out the left most not zero number
+        boolean flag = true;
+        while(mini.charAt(j)=='0'){
+            j++;
+            flag=false;
+        }
+        if(!flag) {
+            mini.setCharAt(0, (char) (mini.charAt(0)+1));
+            mini.setCharAt(j,(char)(mini.charAt(j)-1));
+        }
+        System.out.println(mini+" "+maxi);
     }
     static void kthNotDivisible() {
         InputReader sc = new InputReader(System.in);
@@ -482,8 +541,40 @@ class codeforces {
 
         }
     }
-
+    static void books(){
+        InputReader ip = new InputReader(System.in);
+        int n = ip.readInt();
+        int t = ip.readInt();
+        long[] arr = new long[n];
+        for(int i=0; i<n; i++){
+            arr[i] = ip.readLong();
+        }
+        int r=0;
+        int sm=0;
+        int ans=0;
+        for (int i = 0; i < n; ++i) {
+            while (r < n && sm + arr[r] <= t) {
+                sm += arr[r];
+                ++r;
+            }
+            ans = Math.max(ans, r - i);
+            sm -= arr[i];
+        }
+        System.out.println(ans);
+    }
+    static void copycopycopycopy(){
+        InputReader sc =new InputReader(System.in);
+        int t = sc.readInt();
+        while(t-->0){
+            int n = sc.readInt();
+            Set<Long> set = new TreeSet<>();
+            for(int i=0; i<n; i++){
+                set.add( sc.readLong());
+            }
+            System.out.println(set.size());
+        }
+    }
     public static void main(String[] args) throws IOException{
-        kthNotDivisible();
+        lengthAndSum();
     }
 }
