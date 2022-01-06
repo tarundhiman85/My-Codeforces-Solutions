@@ -166,6 +166,30 @@ public class codeforces {
         }
         return n1;
     }
+    private static boolean solve_subset_sum(int N, int Sum, int a[])
+    {
+        boolean t[][]=new boolean[N+1][Sum+1];
+        for(int j=0; j<=Sum; j++)
+        {
+            t[0][j]=false;
+        }
+        for(int k=0; k<=N; k++)
+        {
+            t[k][0] = true;
+        }
+        for(int i=1; i<=N; i++)
+        {
+            for(int j=1; j<=Sum; j++)
+            {
+                if(a[i-1]<=j)
+                    t[i][j] = t[i-1][j] || t[i-1][j-a[i-1]];
+                else
+                    t[i][j] = t[i-1][j];
+            }
+        }
+        return t[N][Sum];
+    }
+
 
     //Solvers
     static void squareString(){
@@ -664,6 +688,19 @@ public class codeforces {
         }
     }
 
+    static void fairDivision(){
+        InputReader sc = new InputReader(System.in);
+        int t = sc.readInt();
+        while (t-- > 0) {
+            int n=sc.readInt(); int[] arr = new int[n]; int sum=0;
+            for(int i=0; i<n; i++) { arr[i]=sc.readInt(); sum+=arr[i]; }
+            if(sum%2!=0 ) System.out.println("NO");
+            else{
+               if(solve_subset_sum(n,sum/2,arr)) System.out.println("YES");
+               else System.out.println("NO");
+            }
+        }
+    }
 
     //wrong
     static void constructRectangle(){
@@ -771,6 +808,6 @@ public class codeforces {
         }
     }
     public static void main(String[] args) throws IOException{
-         omkarAndLastMath();
+         fairDivision();
     }
 }
