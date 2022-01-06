@@ -94,6 +94,15 @@ public class codeforces {
         return (long) (Math.floor(Math.cbrt(b)) -
                 Math.ceil(Math.cbrt(a)) + 1);
     }
+    private static char different(String s1, String s2, int i) {
+        char check[] = {'a','b','c'};
+        for(char ch: check){
+            if(ch!=s1.charAt(i) && s2.charAt(i)!=ch){
+                return ch;
+            }
+        }
+        return 'z';
+    }
     static long countSquares(long a, long b) {
         return (long) (Math.floor(Math.sqrt(b)) - Math.ceil(Math.sqrt(a)) + 1);
     }
@@ -149,6 +158,13 @@ public class codeforces {
             prefix[i] = sum;
         }
         return prefix;
+    }
+    static long gcdi(long n1, long n2){
+        while (n2>0) {
+            n1 %= n2;
+            long temp=n2; n2=n1; n1=temp;
+        }
+        return n1;
     }
 
     //Solvers
@@ -628,15 +644,26 @@ public class codeforces {
         System.out.println(new String(ans));
     }
 
-    private static char different(String s1, String s2, int i) {
-        char check[] = {'a','b','c'};
-        for(char ch: check){
-            if(ch!=s1.charAt(i) && s2.charAt(i)!=ch){
-                return ch;
+    static void omkarAndLastMath() {
+        InputReader sc = new InputReader(System.in);
+        int t = sc.readInt();
+        while (t-- > 0) {
+            long n = sc.readLong();
+            if(n%2==0){
+                System.out.println(n/2+" "+n/2);
+            }
+            else{
+                for(long i=2; i*i<=n; i++){
+                    if(n%i==0){
+                        System.out.println(n/i+" "+(n-(n/i)));
+                        return;
+                    }
+                }
+                System.out.println("1 "+(n-1));
             }
         }
-        return 'z';
     }
+
 
     //wrong
     static void constructRectangle(){
@@ -744,6 +771,6 @@ public class codeforces {
         }
     }
     public static void main(String[] args) throws IOException{
-         marinaVasya();
+         omkarAndLastMath();
     }
 }
