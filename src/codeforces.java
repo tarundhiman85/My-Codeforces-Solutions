@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class codeforces {
+    static char[] characters = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','x','y','z'};
     //Fast I/O
     static class InputReader {
         private InputStream stream;
@@ -571,7 +572,178 @@ public class codeforces {
             System.out.println(set.size());
         }
     }
+
+    static void marinaVasya(){
+        Scanner sc = new Scanner(System.in);
+        int n=sc.nextInt();
+        int t=n-sc.nextInt();
+        String s1 = sc.next();
+        String s2 = sc.next();
+          int countSame=0;
+          for(int i=0; i<n; i++){
+              if(s1.charAt(i)==s2.charAt(i)) countSame++;
+          }
+
+          int same, diff;
+          if(t<countSame){
+              same=t;
+              diff=0;
+          }
+          else if(t==countSame){
+              same=t;
+              diff=0;
+          }
+          else{
+              same=countSame;
+              diff = (t-same)*2;
+              if(n-countSame<diff){
+                  System.out.println(-1);
+                  return;
+              }
+          }
+          char[] ans = new char[n];
+          for(int i=0; i<n; i++){
+              if(s1.charAt(i)==s2.charAt(i)){
+                  if(same>0){
+                      ans[i] = s1.charAt(i);
+                      same--;
+                  }
+                  else{
+                      ans[i] = different(s1,s2,i);
+                  }
+              }
+              else{
+                  //different
+                  if(diff>0){
+                      ans[i] = s1.charAt(i);
+                      //toggling strings
+                      String tmp = s1; s1=s2; s2=tmp;
+                      diff--;
+                  }
+                  else{
+                      ans[i] = different(s1,s2,i);
+                  }
+              }
+          }
+        System.out.println(new String(ans));
+    }
+
+    private static char different(String s1, String s2, int i) {
+        char check[] = {'a','b','c'};
+        for(char ch: check){
+            if(ch!=s1.charAt(i) && s2.charAt(i)!=ch){
+                return ch;
+            }
+        }
+        return 'z';
+    }
+
+    //wrong
+    static void constructRectangle(){
+        InputReader ir = new InputReader(System.in);
+        int t = ir.readInt();
+        while(t-->0){
+            long l1=ir.readInt();
+            long l2=ir.readInt();
+            long l3=ir.readInt();
+            long max = Math.max(l1,Math.max(l2,l3));
+            boolean flag=false;
+            if(l1 + l2 == l3  || l1==l2){
+                if(l3%2==0) {
+                    System.out.println("YES");
+                }
+                else{
+                    System.out.println("NO");
+                }
+            }
+            else if(l2+l3==l1 || l2==l3){
+                if(l1%2==0) {
+                    System.out.println("YES");
+                }
+                else{
+                    System.out.println("NO");
+                }
+            }
+            else if(l3+l1==l2 || l3==l1){
+                if(l2%2==0) {
+                    System.out.println("YES");
+                }
+                else{
+                    System.out.println("NO");
+                }
+            }
+            else{
+                System.out.println("NO");
+            }
+        }
+    }
+    static void giftFixing() {
+        InputReader sc = new InputReader(System.in);
+        int t = sc.readInt();
+        while (t-- > 0) {
+            int n = sc.readInt();
+            long[] a = new long[n];
+            long[] b = new long[n];
+            long min_a = Long.MAX_VALUE;
+            long min_b =  Long.MAX_VALUE;
+            for (int i = 0; i < n; i++) {
+                a[i] = sc.readInt();
+                min_a=Math.min(min_a,a[i]);
+            }
+            for (int i = 0; i < n; i++) {
+                b[i] = sc.readInt();
+                min_b=Math.min(min_b,b[i]);
+            }
+            long count=0;
+            long d1,d2;
+            for(int i=0; i<n; i++){
+                d1=a[i]-min_a;
+                d2=b[i]-min_b;
+                count+=Math.max(d1,d2);
+            }
+            System.out.println(count);
+        }
+    }
+    static void integerDiversity(){
+        InputReader sc = new InputReader(System.in);
+        int t = sc.readInt();
+        while (t-- > 0) {
+            int n = sc.readInt();
+            long[] arr = new long[n];
+            Map<Long,Long> map = new HashMap<>();
+            for (int i = 0; i < n; i++) {
+                arr[i] = sc.readInt();
+                if(map.containsKey(arr[i])){
+                    map.put(arr[i],map.get(arr[i])+1);
+                }
+                else{
+                    map.put(arr[i],1L);
+                }
+            }
+            int ans=0;
+            if(n==map.size() || map.size()==n/2 && map.size()%2==0){
+                ans=n;
+            }
+            else if(map.size()%2!=0 && map.size()==n/2){
+                ans=n/2;
+            }
+            else{
+                for (Map.Entry<Long,Long> entry : map.entrySet()){
+                    if((map.containsKey((-1)*entry.getKey()) && map.containsKey(entry.getKey())) && entry.getValue()!=0){
+                        //if we have values in negative  -1 1 1
+                        ans+=2;
+                        map.put((-1)*entry.getKey(),0L);
+                        map.put(entry.getKey(), 0L);
+                    }
+                    else if( entry.getValue()!=0 && entry.getValue()>=1 ) {
+                        ans++;
+                    }
+                }
+            }
+            System.out.println(ans);
+        }
+    }
     public static void main(String[] args) throws IOException{
-        kthNotDivisible();
+         marinaVasya();
     }
 }
