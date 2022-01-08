@@ -189,7 +189,24 @@ public class codeforces {
         }
         return t[N][Sum];
     }
-
+    static Boolean SolveCakeIsAlie(int i, int j,int n,int m,int k, Boolean[][] dp){
+      if(k==0 && i==n && j==m){
+          return true;
+      }
+      else if(k<0|| i==n && j==m){
+          return false;
+      }
+      else if(i>n || j>m) return false;
+      else if(dp[i][j]!=null){
+          return dp[i][j];
+      }
+      else{
+          boolean flag1=SolveCakeIsAlie(i,j+1,n,m,k-i,dp);
+          boolean flag2=SolveCakeIsAlie(i+1,j,n,m,k-j,dp);
+          dp[i][j] =  flag1||flag2;
+          return dp[i][j];
+      }
+    }
 
     //Solvers
     static void squareString(){
@@ -702,6 +719,31 @@ public class codeforces {
         }
     }
 
+    static void NumberOfWays(){
+        InputReader sc = new InputReader(System.in);
+        int n=sc.readInt(); int[] arr = new int[n]; int sum=0;
+        for(int i=0; i<n; i++) { arr[i]=sc.readInt(); sum+=arr[i]; }
+        if(n%3!=0) System.out.println(0);
+        else if(sum==0) System.out.println(1);
+        
+    }
+
+    static void cakeIsALie(){
+
+        InputReader sc = new InputReader(System.in);
+        int t=sc.readInt();
+        while (t-->0) {
+            int n = sc.readInt();
+            int m = sc.readInt();
+            int k = sc.readInt();
+            Boolean[][] dp = new Boolean[n+1][m+1];
+            if (SolveCakeIsAlie(1, 1, n, m, k,dp)) {
+                System.out.println("YES");
+            } else {
+                System.out.println("NO");
+            }
+        }
+    }
     //wrong
     static void constructRectangle(){
         InputReader ir = new InputReader(System.in);
@@ -808,6 +850,6 @@ public class codeforces {
         }
     }
     public static void main(String[] args) throws IOException{
-         fairDivision();
+         cakeIsALie();
     }
 }
